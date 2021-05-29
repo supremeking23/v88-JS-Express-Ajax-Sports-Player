@@ -67,7 +67,7 @@
 					search and filter
 
 					<div class="row">
-						<form class="col s12" method="POST" action="filter-process">
+						<form class="col s12" method="POST" action="filter-process" class="filterForm">
 							<div class="row">
 								<div class="input-field col s12">
 									<input id="name" name="name" type="text" class="validate" />
@@ -78,14 +78,14 @@
 							<div class="row">
 								<div class="input-field col s6">
 									<label>
-										<input type="checkbox" class="filled-in" id="gender" value="female" name="gender[]" />
+										<input type="checkbox" class="filled-in gender" id="gender" value="female" name="gender[]" />
 
 										<span>Female</span>
 									</label>
 								</div>
 								<div class="input-field col s6">
 									<label>
-										<input type="checkbox" class="filled-in" id="gender" value="male" name="gender[]" />
+										<input type="checkbox" class="filled-in gender" id="gender" value="male" name="gender[]" />
 
 										<span>Male</span>
 									</label>
@@ -131,6 +131,10 @@
 
 		<script>
 			$(document).ready(function () {
+				$("form").submit(function () {
+					return false;
+				});
+
 				$("#name").on("input", function (e) {
 					let data = {
 						name: e.target.value,
@@ -138,6 +142,37 @@
 					$.post(
 						"filter-by-name",
 						data,
+						function (res) {
+							console.log(res);
+							let html = ``;
+
+							for (let i = 0; i < res.data.length; i++) {
+								html += `<div class="col s3 player card">`;
+								html += `<img src="${res.data[i].image_url}" alt="${res.data[i].image_url}" />`;
+								html += `<p>${res.data[i].name}</p>`;
+								html += `</div>`;
+							}
+
+							$(".players").html(html);
+						},
+						"json"
+					);
+				});
+
+				$(".gender").click(function () {
+					// if ($(this).is(":checked")) {
+					// 	genderArr.push($(this).val());
+					// } else {
+					// 	genderArr.splice($(this).val(), 1);
+					// }
+
+					// console.log(genderArr);
+					let serialize_data = $("form").serialize();
+					console.log(serialize_data);
+
+					$.post(
+						"filter-by-gender",
+						serialize_data,
 						function (res) {
 							console.log(res);
 							let html = ``;

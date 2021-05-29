@@ -50,6 +50,13 @@ class User {
 			return user;
 		} catch (error) {}
 	}
+
+	async filter_gender(gender) {
+		try {
+			const user = await dbConnection.any(`SELECT * FROM users WHERE gender = $1 OR gender = $2 `, [gender[0], gender[1]]);
+			return user;
+		} catch (error) {}
+	}
 }
 
 module.exports = new User();

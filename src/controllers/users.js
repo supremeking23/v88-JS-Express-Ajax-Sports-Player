@@ -43,6 +43,20 @@ class Users {
 			console.log(error);
 		}
 	}
+
+	async filter_gender_ajax(req, res) {
+		console.log(req.body.gender);
+
+		try {
+			let gender = req.body.gender != undefined ? req.body.gender : ["male", "female"];
+			let players = await userModel.filter_gender(gender);
+			res.json({ data: players });
+
+			// console.log(req.body);
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 
 module.exports = new Users();
