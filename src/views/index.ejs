@@ -160,18 +160,35 @@
 				});
 
 				$(".gender").click(function () {
-					// if ($(this).is(":checked")) {
-					// 	genderArr.push($(this).val());
-					// } else {
-					// 	genderArr.splice($(this).val(), 1);
-					// }
-
-					// console.log(genderArr);
 					let serialize_data = $("form").serialize();
 					console.log(serialize_data);
 
 					$.post(
 						"filter-by-gender",
+						serialize_data,
+						function (res) {
+							console.log(res);
+							let html = ``;
+
+							for (let i = 0; i < res.data.length; i++) {
+								html += `<div class="col s3 player card">`;
+								html += `<img src="${res.data[i].image_url}" alt="${res.data[i].image_url}" />`;
+								html += `<p>${res.data[i].name}</p>`;
+								html += `</div>`;
+							}
+
+							$(".players").html(html);
+						},
+						"json"
+					);
+				});
+
+				$(".sports").click(function () {
+					let serialize_data = $("form").serialize();
+					console.log(serialize_data);
+
+					$.post(
+						"filter-by-sports",
 						serialize_data,
 						function (res) {
 							console.log(res);

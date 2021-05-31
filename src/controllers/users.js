@@ -57,6 +57,20 @@ class Users {
 			console.log(error);
 		}
 	}
+
+	async filter_sports_ajax(req, res) {
+		console.log(req.body.gender);
+
+		try {
+			let gender = req.body.sports != undefined ? req.body.sports : [1, 2, 3, 4, 5, 6];
+			let players = await userModel.filter_sport(gender);
+			res.json({ data: players });
+
+			// console.log(req.body);
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 
 module.exports = new Users();

@@ -57,6 +57,16 @@ class User {
 			return user;
 		} catch (error) {}
 	}
+
+	async filter_sport(sport) {
+		try {
+			const user = await dbConnection.any(
+				`SELECT * FROM users WHERE sport_id = $1 OR sport_id = $2 OR sport_id = $3 OR sport_id = $4 OR sport_id = $5 OR sport_id = $6 `,
+				[sport[0], sport[1], sport[2], sport[3], sport[4], sport[5]]
+			);
+			return user;
+		} catch (error) {}
+	}
 }
 
 module.exports = new User();
