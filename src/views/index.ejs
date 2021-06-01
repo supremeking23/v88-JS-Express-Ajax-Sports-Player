@@ -140,7 +140,7 @@
 						name: e.target.value,
 					};
 					$.post(
-						"filter-by-name",
+						"filter-by-name-gender-and-sports",
 						data,
 						function (res) {
 							console.log(res);
@@ -159,12 +159,12 @@
 					);
 				});
 
-				$(".gender").click(function () {
+				$(".gender, .sports").click(function () {
 					let serialize_data = $("form").serialize();
 					console.log(serialize_data);
 
 					$.post(
-						"filter-by-gender-and-sports",
+						"filter-by-name-gender-and-sports",
 						serialize_data,
 						function (res) {
 							console.log(res);
@@ -183,29 +183,29 @@
 					);
 				});
 
-				$(".sports").click(function () {
-					let serialize_data = $("form").serialize();
-					console.log(serialize_data);
+				// $(".sports").click(function () {
+				// 	let serialize_data = $("form").serialize();
+				// 	console.log(serialize_data);
 
-					$.post(
-						"filter-by-gender-and-sports",
-						serialize_data,
-						function (res) {
-							console.log(res);
-							let html = ``;
+				// 	$.post(
+				// 		"filter-by-name-gender-and-sports",
+				// 		serialize_data,
+				// 		function (res) {
+				// 			console.log(res);
+				// 			let html = ``;
 
-							for (let i = 0; i < res.data.length; i++) {
-								html += `<div class="col s3 player card">`;
-								html += `<img src="${res.data[i].image_url}" alt="${res.data[i].image_url}" />`;
-								html += `<p>${res.data[i].name}</p>`;
-								html += `</div>`;
-							}
+				// 			for (let i = 0; i < res.data.length; i++) {
+				// 				html += `<div class="col s3 player card">`;
+				// 				html += `<img src="${res.data[i].image_url}" alt="${res.data[i].image_url}" />`;
+				// 				html += `<p>${res.data[i].name}</p>`;
+				// 				html += `</div>`;
+				// 			}
 
-							$(".players").html(html);
-						},
-						"json"
-					);
-				});
+				// 			$(".players").html(html);
+				// 		},
+				// 		"json"
+				// 	);
+				// });
 			});
 		</script>
 

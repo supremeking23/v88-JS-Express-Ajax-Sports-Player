@@ -44,44 +44,44 @@ class User {
 		} catch (error) {}
 	}
 
-	async filter_name(name) {
-		try {
-			const user = await dbConnection.any(`SELECT * FROM users WHERE name LIKE   '%'||$1||'%' `, [name]);
-			return user;
-		} catch (error) {}
-	}
+	// async filter_name(name) {
+	// 	try {
+	// 		const user = await dbConnection.any(`SELECT * FROM users WHERE name LIKE   '%'||$1||'%' `, [name]);
+	// 		return user;
+	// 	} catch (error) {}
+	// }
 
-	async filter_gender(gender) {
-		try {
-			const user = await dbConnection.any(`SELECT * FROM users WHERE gender = $1 OR gender = $2 `, [gender[0], gender[1]]);
-			return user;
-		} catch (error) {}
-	}
+	// async filter_gender(gender) {
+	// 	try {
+	// 		const user = await dbConnection.any(`SELECT * FROM users WHERE gender = $1 OR gender = $2 `, [gender[0], gender[1]]);
+	// 		return user;
+	// 	} catch (error) {}
+	// }
 
-	async filter_sport(sport) {
-		try {
-			const user = await dbConnection.any(
-				`SELECT * FROM users WHERE sport_id = $1 OR sport_id = $2 OR sport_id = $3 OR sport_id = $4 OR sport_id = $5 OR sport_id = $6 `,
-				[sport[0], sport[1], sport[2], sport[3], sport[4], sport[5]]
-			);
-			return user;
-		} catch (error) {}
-	}
+	// async filter_sport(sport) {
+	// 	try {
+	// 		const user = await dbConnection.any(
+	// 			`SELECT * FROM users WHERE sport_id = $1 OR sport_id = $2 OR sport_id = $3 OR sport_id = $4 OR sport_id = $5 OR sport_id = $6 `,
+	// 			[sport[0], sport[1], sport[2], sport[3], sport[4], sport[5]]
+	// 		);
+	// 		return user;
+	// 	} catch (error) {}
+	// }
 
-	async filter_gender_and_sport(gender, sport) {
-		try {
-			const user = await dbConnection.any(
-				`SELECT * FROM users WHERE (gender = $1 OR gender = $2) AND (sport_id = $3 OR sport_id = $4 OR sport_id = $5 OR sport_id = $6 OR sport_id = $7 OR sport_id = $8) `,
-				[gender[0], gender[1], sport[0], sport[1], sport[2], sport[3], sport[4], sport[5]]
-			);
-			return user;
-		} catch (error) {}
-	}
+	// async filter_gender_and_sport(gender, sport) {
+	// 	try {
+	// 		const user = await dbConnection.any(
+	// 			`SELECT * FROM users WHERE (gender = $1 OR gender = $2) AND (sport_id = $3 OR sport_id = $4 OR sport_id = $5 OR sport_id = $6 OR sport_id = $7 OR sport_id = $8) `,
+	// 			[gender[0], gender[1], sport[0], sport[1], sport[2], sport[3], sport[4], sport[5]]
+	// 		);
+	// 		return user;
+	// 	} catch (error) {}
+	// }
 
 	async filter_name_gender_and_sport(name, gender, sport) {
 		try {
 			const user = await dbConnection.any(
-				`SELECT * FROM users WHERE name LIKE '%'||$1||'%' AND (gender = $1 OR gender = $2) AND (sport_id = $3 OR sport_id = $4 OR sport_id = $5 OR sport_id = $6 OR sport_id = $7 OR sport_id = $8) `,
+				`SELECT * FROM users WHERE (name LIKE '%'||$1||'%') AND (gender = $2 OR gender = $3) AND (sport_id = $4 OR sport_id = $5 OR sport_id = $6 OR sport_id = $7 OR sport_id = $8 OR sport_id = $9) `,
 				[name, gender[0], gender[1], sport[0], sport[1], sport[2], sport[3], sport[4], sport[5]]
 			);
 			return user;
