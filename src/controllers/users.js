@@ -62,14 +62,36 @@ class Users {
 		console.log(req.body.gender);
 
 		try {
-			let gender = req.body.sports != undefined ? req.body.sports : [1, 2, 3, 4, 5, 6];
-			let players = await userModel.filter_sport(gender);
+			let sports = req.body.sports != undefined ? req.body.sports : [1, 2, 3, 4, 5, 6];
+			let players = await userModel.filter_sport(sports);
 			res.json({ data: players });
 
 			// console.log(req.body);
 		} catch (error) {
 			console.log(error);
 		}
+	}
+
+	async filter_gender_and_sports_ajax(req, res) {
+		console.log(req.body);
+		try {
+			let gender = req.body.gender != undefined ? req.body.gender : ["male", "female"];
+			let sports = req.body.sports != undefined ? req.body.sports : [1, 2, 3, 4, 5, 6];
+
+			let players = await userModel.filter_gender_and_sport(gender, sports);
+			res.json({ data: players });
+		} catch (error) {}
+	}
+
+	async filter_name_gender_and_sports_ajax(req, res) {
+		console.log(req.body);
+		try {
+			let gender = req.body.gender != undefined ? req.body.gender : ["male", "female"];
+			let sports = req.body.sports != undefined ? req.body.sports : [1, 2, 3, 4, 5, 6];
+
+			let players = await userModel.filter_name_gender_and_sport(req.body.name, gender, sports);
+			res.json({ data: players });
+		} catch (error) {}
 	}
 }
 
